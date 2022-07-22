@@ -27,4 +27,4 @@ jobs:
           bucket: cloudfrontdemobucket2
           bucket-region: US East (N. Virginia) us-east-1
           dist-id: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
-          invalidation: /b2
+          invalidation: b2/*
