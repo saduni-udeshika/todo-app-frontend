@@ -27,3 +27,76 @@ jobs:
           bucket-region: us-east-1
           dist-id: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
           invalidation: /
+    - name: Slack Notification
+      id: slack
+      uses: slackapi/slack-github-action@v1.19.0
+      with:
+        channel-id: C03Q6RJ9ATF
+        payload: |
+          {
+            "text": "New Beta Version Deployed",
+            "blocks": [
+              {
+                "type": "header",
+                "text": {
+                  "type": "plain_text",
+                  "text": "chatbot-dashbord - [ Beta Environment ]",
+                  "emoji": true
+                }
+              },
+              {
+                "type": "context",
+                "elements": [
+                  {
+                    "type": "mrkdwn",
+                    "text": "*Author:*"
+                  },
+                  {
+                    "type": "image",
+                    "image_url": "https://github.com/${{ github.actor }}.png",
+                    "alt_text": "Author-profile-pic"
+                  },
+                  {
+                    "type": "plain_text",
+                    "text":" ${{ github.actor }} "
+                  }
+                ]
+              },
+              {
+                "type": "divider"
+              },
+              {
+                "type": "section",
+                "fields": [
+                  {
+                    "type": "mrkdwn",
+                    "text": "*Ref:*\n ${{ github.ref }}"
+                  },
+                  {
+                    "type": "mrkdwn",
+                    "text": "*Event:*\n${{ github.event_name }}"
+                  },
+                  {
+                    "type": "mrkdwn",
+                    "text": "*Action URL:*\n <${{ github.event.head_commit.url }}\/checks| ${{ github.workflow }} >"
+                  },
+                  {
+                    "type": "mrkdwn",
+                    "text": "*Commit:*\n<${{ github.event.head_commit.url }}| ${{ steps.vars.outputs.sha8 }} >"
+                  }
+                ]
+              },
+              {
+                "type": "divider"
+              },
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "*Site URL :*<https://chatbot-dashbord.web.app|Beta Site>"
+                }
+              }
+            ]
+          }
+      env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
