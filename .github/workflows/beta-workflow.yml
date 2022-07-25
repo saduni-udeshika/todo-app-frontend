@@ -39,20 +39,72 @@ jobs:
       id: slack
       uses: slackapi/slack-github-action@v1.19.0
       with:
-        channel-id: test-bot
-        payload: |
-          {
-            "text": "New Beta Version Deployed",
-            "blocks": [
-              {
-                "type": "header",
-                "text": {
-                  "type": "plain_text",
-                  "text": "Chatbot Dashboard - [Beta Environment]",
-                  "emoji": true
+          channel-id: 'PROJECT_NAME'
+          payload: |
+            {
+              "text": "New Beta Version Deployed",
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "PROJECT_NAME - [ Beta Environment ]",
+                    "emoji": true
+                  }
+                },
+                {
+                  "type": "context",
+                  "elements": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Author:*"
+                    },
+                    {
+                      "type": "image",
+                      "image_url": "https://github.com/${{ github.actor }}.png",
+                      "alt_text": "Author-profile-pic"
+                    },
+                    {
+                      "type": "plain_text",
+                      "text":" ${{ github.actor }} "
+                    }
+                  ]
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Ref:*\n ${{ github.ref }}"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Event:*\n${{ github.event_name }}"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Action URL:*\n <${{ github.event.head_commit.url }}\/checks| ${{ github.workflow }} >"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Commit:*\n<${{ github.event.head_commit.url }}| ${{ steps.vars.outputs.sha8 }} >"
+                    }
+                  ]
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Site URL :*<https://PROJECT_NAME.web.app|Beta Site>"
+                  }
                 }
-              }
-            ]
-          }
+              ]
+            }
       env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
