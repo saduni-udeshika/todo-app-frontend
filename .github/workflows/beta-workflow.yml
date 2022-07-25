@@ -31,7 +31,7 @@ jobs:
       id: slack
       uses: slackapi/slack-github-action@v1.19.0
       with:
-        channel-id: C03Q6RJ9ATF
+        channel-id: test-bot
         payload: |
           {
             "text": "New Beta Version Deployed",
