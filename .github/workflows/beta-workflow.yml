@@ -15,7 +15,7 @@ jobs:
       run: |
         npm install
         npm run build
-        echo ls -al   
+        ls -al
         
     - name: AWS Deployment
       uses: actions/checkout@master
