@@ -51,7 +51,15 @@ jobs:
                     "text": "test-bot -[Beta Environment]",
                     "emoji": true
                   }
-                }
+                },
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "test-bot -[Beta Environment]",
+                    "emoji": true
+                  }
+                }                
               ]
             }
       env:
