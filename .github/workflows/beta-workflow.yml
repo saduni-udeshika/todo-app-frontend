@@ -42,6 +42,7 @@ jobs:
           channel-id: 'test-bot'
           payload: |
             {
+              "text": "New Beta Version Deployed",
               "blocks": [
                 {
                   "type": "header",
