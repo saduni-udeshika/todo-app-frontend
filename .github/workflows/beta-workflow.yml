@@ -39,72 +39,86 @@ jobs:
       id: slack
       uses: slackapi/slack-github-action@v1.19.0
       with:
-          channel-id: 'PROJECT_NAME'
+          channel-id: 'test-bot'
           payload: |
             {
-              "text": "New Beta Version Deployed",
               "blocks": [
-                {
-                  "type": "header",
-                  "text": {
-                    "type": "plain_text",
-                    "text": "PROJECT_NAME - [ Beta Environment ]",
-                    "emoji": true
-                  }
-                },
-                {
-                  "type": "context",
-                  "elements": [
-                    {
-                      "type": "mrkdwn",
-                      "text": "*Author:*"
-                    },
-                    {
-                      "type": "image",
-                      "image_url": "https://github.com/${{ github.actor }}.png",
-                      "alt_text": "Author-profile-pic"
-                    },
-                    {
-                      "type": "plain_text",
-                      "text":" ${{ github.actor }} "
-                    }
-                  ]
-                },
-                {
-                  "type": "divider"
-                },
-                {
-                  "type": "section",
-                  "fields": [
-                    {
-                      "type": "mrkdwn",
-                      "text": "*Ref:*\n ${{ github.ref }}"
-                    },
-                    {
-                      "type": "mrkdwn",
-                      "text": "*Event:*\n${{ github.event_name }}"
-                    },
-                    {
-                      "type": "mrkdwn",
-                      "text": "*Action URL:*\n <${{ github.event.head_commit.url }}\/checks| ${{ github.workflow }} >"
-                    },
-                    {
-                      "type": "mrkdwn",
-                      "text": "*Commit:*\n<${{ github.event.head_commit.url }}| ${{ steps.vars.outputs.sha8 }} >"
-                    }
-                  ]
-                },
-                {
-                  "type": "divider"
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "*Site URL :*<https://PROJECT_NAME.web.app|Beta Site>"
-                  }
-                }
-              ]
-            }
+               {
+			          "type": "section",
+			          "text": {
+				          "type": "mrkdwn",
+				          "text": "You have a new request:\n*<fakeLink.toEmployeeProfile.com|Fred Enriquez - New device request>*"
+			          }
+		          },
+		{
+			"type": "section",
+			"fields": [
+				{
+					"type": "mrkdwn",
+					"text": "*Type:*\nComputer (laptop)"
+				},
+				{
+					"type": "mrkdwn",
+					"text": "*When:*\nSubmitted Aut 10"
+				},
+				{
+					"type": "mrkdwn",
+					"text": "*Last Update:*\nMar 10, 2015 (3 years, 5 months)"
+				},
+				{
+					"type": "mrkdwn",
+					"text": "*Reason:*\nAll vowel keys aren't working."
+				},
+				{
+					"type": "mrkdwn",
+					"text": "*Specs:*\n\"Cheetah Pro 15\" - Fast, really fast\""
+				}
+			]
+		},
+		{
+			"type": "actions",
+			"elements": [
+				{
+					"type": "button",
+					"text": {
+						"type": "plain_text",
+						"emoji": true,
+						"text": "Approve"
+					},
+					"confirm": {
+						"title": {
+							"type": "plain_text",
+							"text": "Are you sure?"
+						},
+						"text": {
+							"type": "mrkdwn",
+							"text": "Wouldn't you prefer a good game of _chess_?"
+						},
+						"confirm": {
+							"type": "plain_text",
+							"text": "Do it"
+						},
+						"deny": {
+							"type": "plain_text",
+							"text": "Stop, I've changed my mind!"
+						}
+					},
+					"style": "primary",
+					"value": "click_me_123"
+				},
+				{
+					"type": "button",
+					"text": {
+						"type": "plain_text",
+						"emoji": true,
+						"text": "Deny"
+					},
+					"style": "danger",
+					"value": "click_me_123"
+				}
+			]
+		}
+	]
+}
       env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
