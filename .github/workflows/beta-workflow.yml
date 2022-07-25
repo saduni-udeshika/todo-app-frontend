@@ -42,13 +42,14 @@ jobs:
           channel-id: 'test-bot'
           payload: |
             {
-              "text": "GitHub Action build result: ",
+              "text": "New Beta Version Deployed ",
               "blocks": [
                 {
-                  "type": "section",
+                  "type": "header",
                   "text": {
-                    "type": "mrkdwn",
-                    "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+                    "type": "plain_text",
+                    "text": "test-bot -[Beta Environment]",
+                    "emoji": true
                   }
                 }
               ]
