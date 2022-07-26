@@ -11,11 +11,11 @@ jobs:
     - name: Git Checkout
       uses: actions/checkout@v3
     
-    - name: Build Steps                                                   
-      run: |
-        npm install
-        npm run build
-        ls -al
+#    - name: Build Steps                                                   
+#       run: |
+#         npm install
+#         npm run build
+#         ls -al
         
     - name: AWS Deployment
       uses: actions/checkout@master
@@ -24,13 +24,13 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_REGION: 'us-east-1'   # optional: defaults to us-east-1
-        SOURCE_DIR: 'build'      # optional: defaults to entire repository
+        SOURCE_DIR: 'test'      # optional: defaults to entire repository
         
     - name: Invalidate CloudFront
       uses: chetan/invalidate-cloudfront-action@v2
       env:
         DISTRIBUTION: ${{ secrets.DISTRIBUTION }}
-        PATHS: "/index.html"
+        PATHS: "/text.txt"
         AWS_REGION: "us-east-1"
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
