@@ -33,6 +33,10 @@ jobs:
         DISTRIBUTION: ${{ secrets.DISTRIBUTION }}
         PATHS: "/index.html"
 
+    - name: Set Github short -sha
+      id: vars
+      run: echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
+      
     - name: Slack Notification
       id: slack
       uses: slackapi/slack-github-action@v1.19.0
